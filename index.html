@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Ketlin Pereira 💖 Te Amo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Great Vibes & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        romantic: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: {
+                        roseGold: '#e0a96d',
+                        darkBg: '#000000',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #000000;
+            color: #f3f4f6;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        .glass-card {
+            background: rgba(15, 12, 20, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 20, 147, 0.15);
+        }
+
+        .glass-button {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(147, 51, 234, 0.3));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .glass-button:hover, .glass-button:active {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.5), rgba(147, 51, 234, 0.5));
+            box-shadow: 0 0 25px rgba(255, 20, 147, 0.6);
+            transform: scale(0.98);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.7), 0 0 30px rgba(255, 20, 147, 0.5);
+        }
+
+        .glow-title {
+            text-shadow: 0 0 25px rgba(224, 169, 109, 0.8), 0 0 50px rgba(255, 105, 180, 0.6);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff2e88;
+            border-radius: 3px;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.08); }
+        }
+
+        .pulse-heart {
+            animation: pulseGlow 1.8s infinite ease-in-out;
+        }
+
+        @keyframes waveAnim {
+            0%, 100% { height: 6px; }
+            50% { height: 24px; }
+        }
+
+        .wave-bar {
+            width: 3px;
+            background: #ff2e88;
+            border-radius: 2px;
+            animation: waveAnim 1.6s infinite ease-in-out;
+        }
+
+        .wave-bar:nth-child(2) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.6s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.9s; }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-pink-500 selection:text-white">
+
+    <!-- Canvas for Magic Particles & Touch Trail Hearts -->
+    <canvas id="canvas"></canvas>
+
+    <!-- Welcome / Music Activation Overlay -->
+    <div id="welcomeOverlay" class="fixed inset-0 z-50 bg-[#000000]/98 backdrop-blur-2xl flex flex-col items-center justify-center p-6 text-center transition-all duration-700">
+        <div class="glass-card p-8 rounded-3xl max-w-md w-full border border-pink-500/40 shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-12 -left-12 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl"></div>
+            
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-tr from-pink-600 to-purple-600 flex items-center justify-center pulse-heart shadow-xl shadow-pink-500/50">
+                <i class="fa-solid fa-heart text-3xl text-white"></i>
+            </div>
+
+            <h1 class="text-3xl font-bold font-romantic glow-text mb-3 text-pink-300">Ketlin Pereira</h1>
+            <p class="text-gray-200 text-sm mb-8 leading-relaxed font-light">Oie minha princesinha linda da minha vida, deixei uma mensagemzinha pra você com muito amor e carinho</p>
+            
+            <button onclick="startExperience()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-semibold shadow-lg shadow-pink-600/50 transform active:scale-95 transition-all flex items-center justify-center gap-3 text-base">
+                <i class="fa-solid fa-music animate-bounce"></i>
+                <span>Ler mensagem</span>
+            </button>
+            <p class="text-[10px] text-gray-400 mt-4">Toque no botão para abrir a mensagem</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="content-layer flex-1 flex flex-col items-center justify-start p-4 sm:p-6 md:p-10 max-w-2xl mx-auto w-full">
+
+        <!-- Top Header Badge -->
+        <header class="text-center mb-8 w-full">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card text-pink-400 text-xs sm:text-sm mb-4 border border-pink-500/30">
+                <i class="fa-solid fa-sparkles"></i>
+                <span>Para a minha princesinha, estrela da sorte &lt;3 </span>
+                <i class="fa-solid fa-sparkles"></i>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-romantic glow-title text-pink-200 mb-2">
+                Ketlin Pereira
+            </h1>
+            <p class="text-pink-300/80 text-xs sm:text-sm tracking-widest uppercase font-medium">Meu eterno e único amor</p>
+        </header>
+
+        <!-- Main Love Letter Card -->
+        <main class="w-full space-y-6 mb-12">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden border border-pink-500/30">
+                <!-- Background ambient lights -->
+                <div class="absolute top-0 right-0 w-48 h-48 bg-pink-600/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-purple-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400 border border-pink-500/40">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg sm:text-xl font-semibold text-white">Carta de Amor</h2>
+                        <span class="text-xs text-pink-300/70">Escrita especialmente para você</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-gray-200 text-sm sm:text-base leading-relaxed font-light">
+                    <p class="first-letter:text-3xl first-letter:font-romantic first-letter:text-pink-400 first-letter:mr-1">
+                        Minha princesa Ketlin, eu queria te dizer o quanto você é especial para mim. Cada segundo ao seu lado é um presente precioso que eu guardo com todo carinho no meu peito.
+                    </p>
+                    <p>
+                        Seu sorriso é lindo e transforma qualquer dia cinzento em um dia bonito. Minha linda eu amo o seu jeito, a sua voz, amo você como você é, a forma como você faz a minha vida ser infinitamente melhor só por existir nela.
+                    </p>
+                    <p>
+                        Quero que saiba que eu te amo muito, mais do que qualquer palavra possa expressar. Você é meu porto seguro, meu pensamento mais bonito e o meu futuro favorito, sua companhia é top.
+                    </p>
+                    <p class="font-medium text-pink-300 italic pt-3 border-t border-pink-500/20">
+                        "Com você, descobri que o amor verdadeiro é leve, sincero e eterno. Te amo hoje, amanhã e para sempre!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Reason Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div onclick="openReason(1)" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-pink-500/60 transition-all duration-300 group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-sm text-white group-hover:text-pink-300 transition-colors">Por que te amo?</h3>
+                            <p class="text-xs text-gray-400">Toque para descobrir</p>
+                        </div>
+                    </div>
+                    <p id="reason1Text" class="hidden mt-3 text-xs text-pink-200/90 pt-3 border-t border-pink-500/20 animate-fadeIn">
+                        Eu amo você por quem você é, essa menina legal, e divertida, companheira e sincera! Não vejo maudade em você, e estar com você me faz muito bem. ❤️
+                    </p>
+                </div>
+
+                <div onclick="openReason(2)" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-pink-500/60 transition-all duration-300 group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-sm text-white group-hover:text-purple-300 transition-colors">Minha princesinha</h3>
+                            <p class="text-xs text-gray-400">Toque para descobrir</p>
+                        </div>
+                    </div>
+                    <p id="reason2Text" class="hidden mt-3 text-xs text-purple-200/90 pt-3 border-t border-pink-500/20 animate-fadeIn">
+                        Você é a princesa mais bela do mundo, a mulher mais linda, eu te amo, e tenho muita sorte de ter uma pessoa como você ao meu lado, obrigado meu amor ✨
+                    </p>
+                </div>
+            </div>
+
+            <!-- Music Player Control Bar with Equalizer Wave -->
+            <div class="glass-card p-4 rounded-2xl flex items-center justify-between border border-pink-500/30">
+                <div class="flex items-center gap-3">
+                    <!-- Equalizer Wave Animation -->
+                    <div id="equalizer" class="flex items-end gap-1 h-6 px-1 opacity-40">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    <div>
+                        <h4 class="text-xs sm:text-sm font-medium text-white">Te amo Gatinha</h4>
+                        <p class="text-[10px] text-pink-300" id="musicStatus">❤️❤️❤️ Você é o amor da minha vida ❤️❤️❤️ </p>
+                    </div>
+                </div>
+                <button onclick="toggleMusic()" id="musicToggleBtn" class="px-4 py-2 rounded-xl bg-pink-600/30 hover:bg-pink-600/50 text-pink-200 text-xs font-medium border border-pink-500/40 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-play" id="musicIcon"></i>
+                    <span id="musicBtnText">Tocar</span>
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center text-xs text-gray-400 pb-6 w-full">
+            <p>Com todo o meu amor para <span class="text-pink-400 font-semibold">Ketlin Pereira</span> ❤️</p>
+            <p class="mt-1 text-[10px] text-gray-400">Toque em qualquer lugar da tela para soltar corações mágicos</p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript Audio & Animation Engine -->
+    <script>
+        // --- Sintetizador Web Audio API: Ambiente Suave & Relaxante (Dreamy Romantic Ambient) ---
+        class RomanticMusicBox {
+            constructor() {
+                this.ctx = null;
+                this.isPlaying = false;
+                this.timerId = null;
+                this.currentChord = 0;
+                this.tempo = 54; // Andamento bem lento, relaxante e aconchegante
+                this.chordDuration = (60 / this.tempo) * 4; // Cada acorde flutua por ~4.4 segundos
+
+                // Progressão romântica doce e etérea: Cmaj7 -> Am9 -> Fmaj7 -> Gsus4/G
+                this.chords = [
+                    {
+                        pad: [130.81, 196.00, 246.94, 329.63], // C3, G3, B3, E4 (Cmaj7)
+                        arps: [261.63, 329.63, 392.00, 493.88, 523.25]
+                    },
+                    {
+                        pad: [110.00, 164.81, 196.00, 261.63], // A2, E3, G3, C4 (Am9)
+                        arps: [220.00, 261.63, 329.63, 392.00, 440.00]
+                    },
+                    {
+                        pad: [174.61, 220.00, 261.63, 329.63], // F3, A3, C4, E4 (Fmaj7)
+                        arps: [174.61, 261.63, 349.23, 392.00, 523.25]
+                    },
+                    {
+                        pad: [196.00, 246.94, 293.66, 392.00], // G3, B3, D4, G4 (G)
+                        arps: [196.00, 293.66, 392.00, 493.88, 587.33]
+                    }
+                ];
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+
+                    // Master suave para manter a música confortável e não invasiva
+                    this.masterGain = this.ctx.createGain();
+                    this.masterGain.gain.setValueAtTime(0.28, this.ctx.currentTime);
+
+                    // Filtro Lowpass suave a 850Hz: retira qualquer agudo estridente e deixa o timbre aveludado
+                    this.filter = this.ctx.createBiquadFilter();
+                    this.filter.type = 'lowpass';
+                    this.filter.frequency.setValueAtTime(850, this.ctx.currentTime);
+                    this.filter.Q.setValueAtTime(0.7, this.ctx.currentTime);
+
+                    // Delay etéreo / reverb de cauda longa
+                    this.delay = this.ctx.createDelay();
+                    this.delay.delayTime.setValueAtTime(0.48, this.ctx.currentTime);
+
+                    this.delayFeedback = this.ctx.createGain();
+                    this.delayFeedback.gain.setValueAtTime(0.38, this.ctx.currentTime);
+
+                    this.delayFilter = this.ctx.createBiquadFilter();
+                    this.delayFilter.type = 'lowpass';
+                    this.delayFilter.frequency.setValueAtTime(650, this.ctx.currentTime);
+
+                    // Roteamento de áudio espacial
+                    this.delay.connect(this.delayFilter);
+                    this.delayFilter.connect(this.delayFeedback);
+                    this.delayFeedback.connect(this.delay);
+                    this.delay.connect(this.masterGain);
+
+                    this.filter.connect(this.masterGain);
+                    this.masterGain.connect(this.ctx.destination);
+                }
+
+                if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            }
+
+            // Toca um acorde quente de fundo (ambient pad) com ataque e relaxamento suaves
+            playAmbientPad(freqs, startTime, duration) {
+                if (!this.ctx) return;
+
+                freqs.forEach((freq, idx) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+
+                    osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+                    osc.frequency.setValueAtTime(freq, startTime);
+
+                    // Leve desafinação analógica para enriquecer o som
+                    const detune = (idx - 1.5) * 4;
+                    osc.detune.setValueAtTime(detune, startTime);
+
+                    // Fade in longo (respiração) e Fade out gradual
+                    const attack = 1.2;
+                    const release = duration * 0.9;
+                    gain.gain.setValueAtTime(0.0001, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.06, startTime + attack);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + attack + release);
+
+                    osc.connect(gain);
+                    gain.connect(this.filter);
+                    gain.connect(this.delay);
+
+                    osc.start(startTime);
+                    osc.stop(startTime + attack + release + 0.5);
+                });
+            }
+
+            // Toca notas cristalinas e delicadas de piano flutuante
+            playSoftBell(freq, startTime) {
+                if (!this.ctx) return;
+
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, startTime);
+
+                // Ataque macio e decaimento calmo como gotas de orvalho
+                gain.gain.setValueAtTime(0.0001, startTime);
+                gain.gain.linearRampToValueAtTime(0.09, startTime + 0.08);
+                gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 2.8);
+
+                osc.connect(gain);
+                gain.connect(this.filter);
+                gain.connect(this.delay);
+
+                osc.start(startTime);
+                osc.stop(startTime + 3.0);
+            }
+
+            schedule() {
+                if (!this.isPlaying) return;
+
+                const now = this.ctx.currentTime;
+                const chordData = this.chords[this.currentChord];
+
+                // Acorde relaxante de fundo
+                this.playAmbientPad(chordData.pad, now, this.chordDuration);
+
+                // Notas cintilantes esparsas que acompanham o acorde calmamente
+                const subInterval = this.chordDuration / 4;
+                chordData.arps.slice(0, 3).forEach((note, index) => {
+                    const noteTime = now + (index * subInterval) + 0.3;
+                    this.playSoftBell(note, noteTime);
+                });
+
+                this.currentChord = (this.currentChord + 1) % this.chords.length;
+                this.timerId = setTimeout(() => this.schedule(), this.chordDuration * 1000);
+            }
+
+            play() {
+                this.init();
+                if (!this.isPlaying) {
+                    this.isPlaying = true;
+                    this.schedule();
+                }
+            }
+
+            pause() {
+                this.isPlaying = false;
+                if (this.timerId) {
+                    clearTimeout(this.timerId);
+                    this.timerId = null;
+                }
+            }
+        }
+
+        const music = new RomanticMusicBox();
+        const musicStatus = document.getElementById('musicStatus');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicBtnText = document.getElementById('musicBtnText');
+        const welcomeOverlay = document.getElementById('welcomeOverlay');
+        const equalizer = document.getElementById('equalizer');
+
+        function startExperience() {
+            welcomeOverlay.style.opacity = '0';
+            setTimeout(() => {
+                welcomeOverlay.style.display = 'none';
+            }, 700);
+
+            music.play();
+            updateMusicUI(true);
+            createHeartBurst(window.innerWidth / 2, window.innerHeight / 2);
+        }
+
+        function toggleMusic() {
+            if (music.isPlaying) {
+                music.pause();
+                updateMusicUI(false);
+            } else {
+                music.play();
+                updateMusicUI(true);
+            }
+        }
+
+        function updateMusicUI(isPlaying) {
+            if (isPlaying) {
+                musicStatus.textContent = "❤️❤️❤️ Você é o amor da minha vida ❤️❤️❤️";
+                musicIcon.className = "fa-solid fa-pause";
+                musicBtnText.textContent = "Pausar";
+                equalizer.style.opacity = "1";
+            } else {
+                musicStatus.textContent = "Música pausada";
+                musicIcon.className = "fa-solid fa-play";
+                musicBtnText.textContent = "Tocar";
+                equalizer.style.opacity = "0.3";
+            }
+        }
+
+        // Desbloqueio sonoro de toque único para qualquer tela inicial
+        document.addEventListener('click', () => {
+            if (!music.isPlaying && welcomeOverlay.style.display === 'none') {
+                music.play();
+                updateMusicUI(true);
+            }
+        }, { once: true });
+
+        // --- Motivos Interativos ---
+        function openReason(id) {
+            const textElem = document.getElementById(`reason${id}Text`);
+            if (textElem.classList.contains('hidden')) {
+                textElem.classList.remove('hidden');
+                createHeartBurst(window.innerWidth / 2, window.innerHeight / 2);
+            } else {
+                textElem.classList.add('hidden');
+            }
+        }
+
+        // --- Canvas Particle & Touch Trail Engine ---
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+        let mouse = { x: -100, y: -100 };
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor(x, y, isHeart = false) {
+                this.x = x;
+                this.y = y;
+                this.isHeart = isHeart;
+                this.size = isHeart ? Math.random() * 12 + 10 : Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * (isHeart ? 2 : 1.5);
+                this.speedY = isHeart ? -(Math.random() * 2 + 1) : (Math.random() - 0.5) * 1.5;
+                this.gravity = isHeart ? -0.04 : 0;
+                this.life = 1;
+                this.decay = Math.random() * 0.01 + 0.005;
+                this.color = isHeart ? (Math.random() > 0.3 ? '#ff2e88' : '#e0a96d') : (Math.random() > 0.5 ? 'rgba(255, 105, 180, 0.7)' : 'rgba(224, 169, 109, 0.7)');
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += this.gravity;
+                this.life -= this.decay;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.life);
+                if (this.isHeart) {
+                    ctx.fillStyle = this.color;
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 12;
+                    drawHeartSymbol(ctx, this.x, this.y, this.size);
+                } else {
+                    ctx.fillStyle = this.color;
+                    ctx.shadowColor = this.color;
+                    ctx.shadowBlur = 8;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function drawHeartSymbol(ctx, x, y, size) {
+            ctx.beginPath();
+            let d = size;
+            ctx.moveTo(x, y + d / 4);
+            ctx.bezierCurveTo(x, y, x - d / 2, y - d / 2, x - d, y + d / 4);
+            ctx.bezierCurveTo(x - d, y + d / 2, x - d / 2, y + d * 0.75, x, y + d);
+            ctx.bezierCurveTo(x + d / 2, y + d * 0.75, x + d, y + d / 2, x + d, y + d / 4);
+            ctx.bezierCurveTo(x + d / 2, y - d / 2, x, y, x, y + d / 4);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // Partículas de ambiente iniciais
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle(Math.random() * width, Math.random() * height, Math.random() > 0.7));
+        }
+
+        function createHeartBurst(x, y) {
+            for (let i = 0; i < 10; i++) {
+                particles.push(new Particle(x, y, true));
+            }
+        }
+
+        // Rastro Touch e Mouse
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            if (Math.random() < 0.4) {
+                particles.push(new Particle(mouse.x, mouse.y, Math.random() > 0.6));
+            }
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                mouse.x = e.touches[0].clientX;
+                mouse.y = e.touches[0].clientY;
+                particles.push(new Particle(mouse.x, mouse.y, true));
+            }
+        }, { passive: true });
+
+        window.addEventListener('click', (e) => {
+            createHeartBurst(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 0) {
+                createHeartBurst(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        // Loop de Renderização 60 FPS
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            if (Math.random() < 0.06) {
+                particles.push(new Particle(Math.random() * width, height + 20, true));
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                let p = particles[i];
+                p.update();
+                p.draw();
+
+                if (p.life <= 0 || p.y < -50) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            // Brilho do cursor / toque
+            if (mouse.x > 0 && mouse.y > 0) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(mouse.x, mouse.y, 18, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255, 46, 136, 0.15)';
+                ctx.shadowColor = '#ff2e88';
+                ctx.shadowBlur = 20;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
